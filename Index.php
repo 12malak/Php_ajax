@@ -27,12 +27,16 @@
 
 
             // Handle the response from the server
-            if (myData == "2") {
+            if (myData == "1") {
                 $("#myDiv").html("<p style='color:red;'>Please Fill Out The Form!</p>");
             }
+            else if (myData == "3") {
+                $("#myDiv").html("<p style='color:red;'> Email already exists </p>");
+            }
             
-            else if (myData == "1") {
-                $("#myDiv").html("<p>Registration Done <a style='color:#08d;' href='Login.php'>login</a></p>");
+            else if (myData == "2") {
+                $("#myDiv").html("<p style='color:red;'>Registration successful <a style='color:#08d;' href='Login.php'>login</a></p>");
+        
             }
             
             else {
@@ -93,7 +97,7 @@
         </div>
         <button type="text" class="submit" id="btn">submit</button>
       
-        <div class="subtitle" id="myDiv">  </div>
+        <div class="subtitle" id="myDiv">  Need an account?  <a style='color:#08d;' href='Login.php'>login</a>  </div>
     </div>
 </body>
 

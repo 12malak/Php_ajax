@@ -29,8 +29,11 @@ if(myData==1){
 window.location= "Welcome.php"
 
 }
-else {
-                            $("#myDiv").html("<p> please check your email or password </p>");
+else if (myData ==0) {
+                $("#myDiv").html("<p style='color:red;'>Incorrect password </p>");
+            }
+else if (myData ==2){
+                            $("#myDiv").html("<p  style='color:red;'> User not found </p>");
                         }
                 }
             });   //  end ajax
@@ -80,7 +83,7 @@ else {
 
         <button type="text" class="submit" id="btn">submit</button>
       
-        <div class="subtitle" id="myDiv">  </div>
+        <div class="subtitle" id="myDiv"> Need an account <a style='color:#08d;' href='Index.php'> Register</a> </div>
     </div>
 </body>
 

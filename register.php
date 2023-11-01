@@ -2,28 +2,44 @@
 
 // Assuming you've received POST data securely
 
-  $UserName= $_POST["UserName"];
-  $password= $_POST["password"];
-  $email= $_POST["email"];
+$UserName = $_POST["UserName"];
+$password = $_POST["password"];
+$email = $_POST["email"];
 
-
-  
-  if(empty($UserName) || empty($password) || empty($email)){
-    echo 2;
+// Validate that the inputs are not empty
+if (empty($UserName) || empty($password) || empty($email)) {
+    echo 1;
     exit;
-  }
+}
+
 // Create a database connection
 $conn = new mysqli("localhost", "root", "", "Login");
 
+// Check if the email already exists in the database
+$emailCheck = $conn->prepare("SELECT * FROM users WHERE email = ?");
+$emailCheck->bind_param("s", $email);
+$emailCheck->execute();
+$emailCheck->store_result();
 
+if ($emailCheck->num_rows > 0) {
+    echo 3; // Email already exists
+    exit;
+}
 
-// Bind the parameters and their types
-// "sss" indicates that you're binding three string values 
+// Encrypt the password using password_hash
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-$stmt = $conn->prepare("insert into users values(? ,? ,?);");
-$stmt->bind_param("sss", $UserName ,$password ,$email );
+// Insert the user data into the database
+$stmt = $conn->prepare("INSERT INTO users (UserName, password, email) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $UserName, $hashedPassword, $email);
 
-// Execute the prepared statement
-$stmt->execute();
+if ($stmt->execute()) {
+    echo 2; // Registration successful
+} else {
+    echo 4; // Registration failed
+}
 
-echo 1;
+// Close the database connections
+$stmt->close();
+$conn->close();
+?>
