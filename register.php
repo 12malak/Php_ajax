@@ -1,14 +1,23 @@
 <?php
-
 // Assuming you've received POST data securely
-
 $UserName = $_POST["UserName"];
 $password = $_POST["password"];
 $email = $_POST["email"];
 
 // Validate that the inputs are not empty
 if (empty($UserName) || empty($password) || empty($email)) {
-    echo 1;
+    echo 1; // Empty field(s)
+    exit;
+}
+
+// Validate email format
+if (!preg_match('/^\S+@\S+\.\S+$/', $email)) {
+    echo 7; // Invalid email format
+    exit;
+}
+// Validate password: It must be at least 8 characters long and contain a mix of letters, numbers, and special characters.
+if (strlen($password) < 8 || !preg_match('/[A-Za-z]/', $password) || !preg_match('/[0-9]/', $password) || !preg_match('/[!@#\$%^&*()\-_+=<>?]/', $password)) {
+    echo 6; // Invalid password format
     exit;
 }
 

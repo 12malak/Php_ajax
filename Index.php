@@ -38,6 +38,14 @@
                 $("#myDiv").html("<p style='color:red;'>Registration successful <a style='color:#08d;' href='Login.php'>login</a></p>");
         
             }
+            else if (myData == "6") {
+                $("#myDiv").html("<p style='color:red;'> password:It must be at least 8 characters long and contain a mix of letters, numbers, and special characters.</p>");
+        
+            }
+            else if (myData == "7") {
+                $("#myDiv").html("<p style='color:red;'>The email address is invalid. It should be of the following format example@gmail.com</p>");
+        
+            }
             
             else {
                 $("#myDiv").html("<p style='color:red;'>Registration failed</p>");

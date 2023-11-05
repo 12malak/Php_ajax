@@ -26,7 +26,7 @@
                 },success: function(myData) {
                     // Handle the response from the server
 if(myData==1){
-window.location= "Welcome.php"
+window.location= "Home.php"
 
 }
 else if (myData ==0) {
